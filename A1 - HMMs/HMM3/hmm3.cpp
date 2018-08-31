@@ -128,11 +128,23 @@ void calcPi(double* pi, double* gamma, int N){
   }
 }
 
+double calcDistance(double* A, double* B, int L){
+  double res = .0;
+  for(int i=0;i<L;i++){
+    res += pow(abs(B[i]-A[i]),2);
+  }
+  return sqrt(res);
+}
+
 int main(){
   int N;
   int K;
   int T;
   int rowHeight;
+
+  double AGoal[9] = {.7, .05, .25, .1, .8, .1, .2, .3, .5};
+  double BGoal[12] = {.7, .2, .1, 0, .1, .4, .3, .2, 0, .1, .2, .7};
+  double piGoal[3] = {1, 0, 0};
 
   std::cin>>N>>N;
   double* A = new double[N*N]();
@@ -140,19 +152,25 @@ int main(){
     std::cin>>A[i];
   }
 
+  std::cout<<"Distance A: "<<calcDistance(A,AGoal,9)<<std::endl;
+
   std::cin>>N>>K;
   double* B = new double[N*K]();
   for(int i=0;i<N*K;i++){
     std::cin>>B[i];
   }
 
+  std::cout<<"Distance B: "<<calcDistance(B,BGoal,12)<<std::endl;
+
   std::cin>>rowHeight>>N;
   double* pi = new double[N]();
   for(int i=0;i<N;i++){
     std::cin>>pi[i];
   }
+  std::cout<<"Distance pi: "<<calcDistance(pi,piGoal,3)<<std::endl;
 
   std::cin>>T;
+  std::cout<<T<<std::endl;
   int* O = new int[T]();
   for(int i=0;i<T;i++){
     std::cin>>O[i];
@@ -167,7 +185,7 @@ int main(){
   double prevLogProb = INT_MIN;
   int i = 0;
 
-  while(i < 500  && logProb > prevLogProb){
+  while(i < 999999  && logProb > prevLogProb){
     double* c = new double[T]();
     alphaPass(alpha, A, B, pi, O, c, K, N, T);
     betaPass(beta, O, A, B, c, K, N, T);
@@ -194,7 +212,16 @@ int main(){
   for(int i=0;i<N*K;i++){
     std::cout<<B[i]<<" ";
   }
-  std::cout<<std::endl;
+  std::cout<<std::endl<<rowHeight<<" "<<N<<" ";
+  for(int i=0;i<N*rowHeight;i++){
+    std::cout<<pi[i]<<" ";
+  }
+  std::cout<<std::endl<<i<<std::endl;
+
+  std::cout<<"Distance A: "<<calcDistance(A,AGoal,9)<<std::endl;
+  std::cout<<"Distance B: "<<calcDistance(B,BGoal,12)<<std::endl;
+  std::cout<<"Distance pi: "<<calcDistance(pi,piGoal,3)<<std::endl;
+
 
   return 0;
 }
