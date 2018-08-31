@@ -24,10 +24,13 @@
 >**Answer**<br />
 >They have the same size, given by the number of observations and the number of states. so they are both <img src="https://latex.codecogs.com/gif.latex?N\times%20T"  title="" />.
 
-> **Question 6:** Why we do we need to divide by the sum over the final <img src="https://latex.codecogs.com/gif.latex?\alpha"  title="" /> values for the di-gamma
-function?<br />
+> **Question 6:** Why we do we need to divide by the sum over the final <img src="https://latex.codecogs.com/gif.latex?\alpha"  title="" /> values for the di-gamma function?<br />
 >**Answer**<br />
->
+> Bayes' theorem<br />
+> <img src="https://latex.codecogs.com/gif.latex?P(A|B)=\frac{P(B|A)P(A)}{P(B)}=\frac{P(\textbf{O}_{1:T}=\textbf{o}_{1:T}|\textbf{X}_t=\textbf{x}_i,\textbf{X}_{t+1}=\textbf{x}_j)P(\textbf{X}_t=\textbf{x}_i,\textbf{X}_{t+1}=\textbf{x}_j)}{P(\textbf{O}_{1:T}=\textbf{o}_{1:T})}"  title="" /><br />
+>From 2.14 and 2.15 we can see that<br />
+><img src="https://latex.codecogs.com/gif.latex?P(\textbf{O}_{1:T}=\textbf{o}_{1:T})=\sum_{j=1}^{N}\alpha_T(j)"  title="" /><br />
+>Which is the denominator we are looking for.
 
 > **Question 7:** Train an HMM with the same parameter dimensions as above, i.e. <img src="https://latex.codecogs.com/gif.latex?\textbf{A}"  title="" /> should be a 3 times 3 matrix, etc. Initialize your algorithm with the following matrices:<br /><br /><img src="https://latex.codecogs.com/gif.latex?\textbf{A}=\begin{pmatrix}0.54&0.26&0.2\\0.19&0.53&0.28\\0.22&0.18&0.6\end{pmatrix}" title="" /> <img src="https://latex.codecogs.com/gif.latex?\textbf{B}=\begin{pmatrix}0.5&0.2&0.11&0.19\\0.22&0.28&0.23&0.27\\0.19&0.21&0.15&0.45\end{pmatrix}" title="" /> <img src="https://latex.codecogs.com/gif.latex?\pi=\begin{pmatrix}0.3&0.2&0.5\end{pmatrix}" title="" /><br /><br />Does the algorithm converge? How many observations do you need for the algorithm to converge? How can you define convergence?<br />
 > **Answer**<br />
